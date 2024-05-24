@@ -23,6 +23,6 @@ export const signup = unAuthenticatedAction(
         }
 
         revalidatePath('/', 'layout');
-        redirect('/dashboard/account');
+        redirect('/account/verify-email');
     }
 );
