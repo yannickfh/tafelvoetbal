@@ -1,24 +1,45 @@
 {
-  "name": "tafelvoetbal",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.2"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.2"
-  }
+    "name": "tafelvoetbal",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "prepare": "panda codegen",
+        "dev": "rm -rf .next && next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "generate:types": "npx supabase gen types typescript --local > types/supabase.ts",
+        "generate:enums": "node ./scripts/generate-enums.js"
+    },
+    "dependencies": {
+        "@ark-ui/react": "^2.2.3",
+        "@hookform/resolvers": "^3.4.0",
+        "@supabase/ssr": "^0.3.0",
+        "@supabase/supabase-js": "^2.42.5",
+        "date-fns": "^3.6.0",
+        "dotenv": "^16.4.5",
+        "lucide-react": "^0.372.0",
+        "next": "14.2.2",
+        "next-safe-action": "^6.2.0",
+        "postgres": "^3.4.4",
+        "react": "^18",
+        "react-dom": "^18",
+        "react-hook-form": "^7.51.4",
+        "zod": "^3.23.4",
+        "zod-form-data": "^2.0.2"
+    },
+    "devDependencies": {
+        "@pandacss/dev": "^0.37.2",
+        "@park-ui/panda-preset": "^0.37.0",
+        "@snaplet/copycat": "^5.0.0",
+        "@snaplet/seed": "^0.97.19",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.2",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.2.5",
+        "typescript": "^5.4.5"
+    }
 }

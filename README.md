@@ -20,12 +20,42 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Resetting the project
+
+When resetting supabase not everything is correct. Make sure you also follow the additional steps below.
+
+-   add the avatar bucket
+
+```sql
+-- Set up Storage!
+insert into storage.buckets (id, name)
+  values ('avatars', 'avatars');
+
+-- Set up access controls for storage.
+-- See https://supabase.com/docs/guides/storage/security/access-control#policy-examples for more details.
+create policy "Avatar images are publicly accessible." on storage.objects
+  for select using (bucket_id = 'avatars');
+
+create policy "Anyone can upload an avatar." on storage.objects
+  for insert with check (bucket_id = 'avatars');
+
+create policy "Anyone can update their own avatar." on storage.objects
+  for update using ((select auth.uid()) = owner) with check (bucket_id = 'avatars');
+```
+
+-   set up the correct timezone
+
+```sql
+alter database postgres
+set timezone to 'Europe/Amsterdam';
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
